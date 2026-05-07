@@ -1,0 +1,8 @@
+{
+  "name": "CityFlavors - 异地寻味",
+  "description": "为游客量身定制的异地城市美食探索与外卖服务。智能推荐当地特色及分时段美食指南。",
+  "requestFramePermissions": [
+    "geolocation"
+  ],
+  "majorCapabilities": []
+}
