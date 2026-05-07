@@ -1,0 +1,8 @@
+{
+  "name": "CityFlavors - 异地寻味-特色模块迭代",
+  "description": "迭代特色模块表达信息",
+  "requestFramePermissions": [
+    "geolocation"
+  ],
+  "majorCapabilities": []
+}
