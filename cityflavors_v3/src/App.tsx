@@ -120,28 +120,27 @@ export default function App() {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-[#F0F2F5] p-4 lg:p-10 gap-6">
-      {/* External Toggle for Day/Night Mode */}
-      <div className="flex items-center gap-4 bg-white px-6 py-3 rounded-full shadow-lg border border-gray-100 z-[200]">
-        <span className={cn("text-xs font-bold transition-colors", !isNight ? "text-orange-500" : "text-gray-400")}>锦绣白昼</span>
-        <button 
-          onClick={() => setIsNight(!isNight)}
-          className={cn(
-            "w-12 h-6 rounded-full relative transition-colors duration-300",
-            isNight ? "bg-indigo-600" : "bg-orange-400"
-          )}
-        >
-          <motion.div 
-            animate={{ x: isNight ? 26 : 2 }}
-            className="absolute top-1 left-0 w-4 h-4 bg-white rounded-full shadow-sm flex items-center justify-center"
-          >
-            {isNight ? <Moon className="w-2.5 h-2.5 text-indigo-600" /> : <Sun className="w-2.5 h-2.5 text-orange-400" />}
-          </motion.div>
-        </button>
-        <span className={cn("text-xs font-bold transition-colors", isNight ? "text-indigo-600" : "text-gray-400")}>华灯初上</span>
-      </div>
-
       {/* --- Mobile Platform (Simulated 16:9) --- */}
-      <div className="relative w-full max-w-[375px] h-[812px] bg-white rounded-[48px] shadow-[0_40px_100px_rgba(0,0,0,0.2)] overflow-hidden border-[10px] border-gray-900 ring-4 ring-white/20">
+      <div className="relative w-full max-w-[375px] h-[812px] bg-white rounded-[48px] shadow-[0_40px_100_rgba(0,0,0,0.2)] overflow-hidden border-[10px] border-gray-900 ring-4 ring-white/20">
+        {/* Mobile-Integrated Toggle for Day/Night Mode (Semi-transparent & Pinned) */}
+        <div className="absolute top-12 left-1/2 -translate-x-1/2 flex items-center gap-3 bg-white/20 backdrop-blur-lg px-4 py-2 rounded-full shadow-sm border border-white/30 z-[210] transition-all duration-500">
+          <span className={cn("text-[9px] font-black transition-colors tracking-tight", !isNight ? "text-orange-600" : "text-white/40")}>锦绣白昼</span>
+          <button 
+            onClick={() => setIsNight(!isNight)}
+            className={cn(
+              "w-10 h-5 rounded-full relative transition-colors duration-300",
+              isNight ? "bg-indigo-600/60" : "bg-orange-400/60"
+            )}
+          >
+            <motion.div 
+              animate={{ x: isNight ? 22 : 2 }}
+              className="absolute top-0.5 left-0 w-4 h-4 bg-white rounded-full shadow-sm flex items-center justify-center"
+            >
+              {isNight ? <Moon className="w-2 h-2 text-indigo-600" /> : <Sun className="w-2 h-2 text-orange-400" />}
+            </motion.div>
+          </button>
+          <span className={cn("text-[9px] font-black transition-colors tracking-tight", isNight ? "text-indigo-400" : "text-gray-900/30")}>华灯初上</span>
+        </div>
         {/* Tooltip Overlay */}
         {showTooltip && (
           <div 
