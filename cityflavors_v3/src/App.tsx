@@ -307,7 +307,7 @@ export default function App() {
                         <motion.button
                           key={i} 
                           whileTap={{ scale: 0.95 }}
-                          onClick={() => handleAISearch(word.text)}
+                          onClick={() => window.location.href = 'https://landingpage-v1-7b3.pages.dev/'}
                           className="whitespace-nowrap px-2.5 py-1 bg-gray-50 text-[9px] font-black text-gray-600 rounded-lg border border-gray-100 flex items-center gap-1 hover:bg-orange-50 hover:text-orange-600 transition-colors"
                         >
                           <span className="text-orange-500">#</span>{word.text}
