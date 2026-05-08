@@ -1,0 +1,8 @@
+{
+  "name": "异地新首页demo2_纵向排布",
+  "description": "纵向排布展示主推菜+特色+热门词条",
+  "requestFramePermissions": [
+    "geolocation"
+  ],
+  "majorCapabilities": []
+}

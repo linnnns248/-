@@ -1,0 +1,18 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", ui-sans-serif, system-ui, sans-serif;
+  
+  --color-brand-primary: #FFCC33; /* Main Meituan Yellow */
+  --color-brand-secondary: #FF8000; /* Warm Orange */
+}
+
+body {
+  background-color: #F6F6F6;
+  color: #333333;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
