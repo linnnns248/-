@@ -114,16 +114,13 @@ export default function App() {
     setScrollY(e.currentTarget.scrollTop);
   };
 
-  const handleAISearch = (keyword: string) => {
-    alert(`正在为您通过全网AI搜索: ${keyword}\n探索地道成都风味中...`);
-  };
-
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-[#F0F2F5] p-4 lg:p-10 gap-6">
-      {/* --- Mobile Platform (Simulated 16:9) --- */}
-      <div className="relative w-full max-w-[375px] h-[812px] bg-white rounded-[48px] shadow-[0_40px_100_rgba(0,0,0,0.2)] overflow-hidden border-[10px] border-gray-900 ring-4 ring-white/20">
-        {/* Mobile-Integrated Toggle for Day/Night Mode (Semi-transparent & Pinned) */}
-        <div className="absolute top-12 left-1/2 -translate-x-1/2 flex items-center gap-3 bg-white/20 backdrop-blur-lg px-4 py-2 rounded-full shadow-sm border border-white/30 z-[210] transition-all duration-500">
+    <div className={cn("min-h-screen flex flex-col transition-colors duration-700", isNight ? "bg-[#0A0B14]" : "bg-white")}>
+      {/* --- Global Content Area (Self-Adaptive Size) --- */}
+      <div className="relative flex-1 flex flex-col w-full max-w-lg mx-auto overflow-hidden">
+        
+        {/* State Toggle - Floating & Semi-transparent */}
+        <div className="fixed top-6 left-1/2 -translate-x-1/2 flex items-center gap-3 bg-white/20 backdrop-blur-lg px-4 py-2 rounded-full shadow-lg border border-white/30 z-[210] transition-all duration-500">
           <span className={cn("text-[9px] font-black transition-colors tracking-tight", !isNight ? "text-orange-600" : "text-white/40")}>锦绣白昼</span>
           <button 
             onClick={() => setIsNight(!isNight)}
@@ -432,34 +429,34 @@ export default function App() {
           </main>
         </div>
 
-        {/* --- Tab Bar (Frame Pinned) --- */}
-        <div className="absolute bottom-0 left-0 right-0 z-50">
-          <nav className="bg-white/95 backdrop-blur-xl border-t border-gray-100 pt-2.5 pb-7 px-10 flex justify-between items-center shadow-[0_-15px_40px_rgba(0,0,0,0.06)] ring-1 ring-black/5">
+        {/* --- Tab Bar (Bottom Pinned) --- */}
+        <div className={cn(
+          "fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-lg z-50 transition-all duration-500",
+          isNight ? "bg-indigo-950/80 backdrop-blur-xl border-t border-white/5" : "bg-white/80 backdrop-blur-xl border-t border-gray-100"
+        )}>
+          <nav className="pt-2.5 pb-8 px-10 flex justify-between items-center">
              <div className="flex flex-col items-center gap-1 text-orange-500">
                 <div className="p-1 rounded-xl bg-orange-50 ring-1 ring-orange-100 shadow-sm">
                   <UtensilsCrossed className="w-4.5 h-4.5 fill-current" />
                 </div>
                 <span className="text-[9px] font-black">外卖</span>
              </div>
-             <div className="flex flex-col items-center gap-1 text-gray-400 group cursor-pointer">
-                <Compass className="w-4.5 h-4.5 group-hover:text-gray-900 transition-colors" />
-                <span className="text-[9px] font-bold group-hover:text-gray-900 transition-colors">寻味</span>
+             <div className={cn("flex flex-col items-center gap-1 group cursor-pointer transition-colors", isNight ? "text-white/40 hover:text-white" : "text-gray-400 hover:text-gray-900")}>
+                <Compass className="w-4.5 h-4.5" />
+                <span className="text-[9px] font-bold">寻味</span>
              </div>
-             <div className="flex flex-col items-center gap-1 text-gray-400 group cursor-pointer">
-                <Clock className="w-4.5 h-4.5 group-hover:text-gray-900 transition-colors" />
-                <span className="text-[9px] font-bold group-hover:text-gray-900 transition-colors">订单</span>
+             <div className={cn("flex flex-col items-center gap-1 group cursor-pointer transition-colors", isNight ? "text-white/40 hover:text-white" : "text-gray-400 hover:text-gray-900")}>
+                <Clock className="w-4.5 h-4.5" />
+                <span className="text-[9px] font-bold">订单</span>
              </div>
-             <div className="flex flex-col items-center gap-1 text-gray-400 group cursor-pointer">
+             <div className={cn("flex flex-col items-center gap-1 group cursor-pointer transition-colors", isNight ? "text-white/40 hover:text-white" : "text-gray-400 hover:text-gray-900")}>
                 <div className="w-4.5 h-4.5 rounded-full bg-gray-100 border border-gray-300 ring-1 ring-white overflow-hidden shadow-sm">
                    <img src="https://i.pravatar.cc/100?u=me" alt="user" referrerPolicy="no-referrer" />
                 </div>
-                <span className="text-[9px] font-bold group-hover:text-gray-900 transition-colors">我的</span>
+                <span className="text-[9px] font-bold">我的</span>
              </div>
           </nav>
         </div>
-
-        {/* --- Dynamic Island Mock --- */}
-        <div className="absolute top-[10px] left-1/2 -translate-x-1/2 w-28 h-6 bg-black rounded-full z-[100] shadow-sm" />
       </div>
     </div>
   );
