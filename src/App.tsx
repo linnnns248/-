@@ -32,12 +32,18 @@ interface Restaurant {
   deliveryFee: string;
 }
 
+const IMAGE_FALLBACK =
+  'data:image/svg+xml;utf8,' +
+  encodeURIComponent(
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 220"><rect width="320" height="220" fill="#F5F5F5"/><rect x="24" y="24" width="272" height="172" rx="16" fill="#FAFAFA" stroke="#E5E5E5"/><path d="M98 142l34-38 26 29 28-24 36 33H98z" fill="#D9D9D9"/><circle cx="126" cy="88" r="18" fill="#E5E5E5"/><text x="160" y="190" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#999999">No Image</text></svg>',
+  );
+
 const CATEGORIES = [
-  { name: '顺风外卖', icon: <UtensilsCrossed className="w-8 h-8 text-orange-500" /> },
-  { name: '甜点饮品', icon: <Coffee className="w-8 h-8 text-orange-500" /> },
-  { name: '超市便利', icon: <Store className="w-8 h-8 text-orange-500" /> },
-  { name: '新鲜水果', icon: <TrendingUp className="w-8 h-8 text-orange-500" /> },
-  { name: '全部分类', icon: <ChevronRight className="w-8 h-8 text-orange-500" /> },
+  { name: '顺风外卖', icon: <UtensilsCrossed className="w-8 h-8 text-[#FF7700]" /> },
+  { name: '甜点饮品', icon: <Coffee className="w-8 h-8 text-[#FF7700]" /> },
+  { name: '超市便利', icon: <Store className="w-8 h-8 text-[#FF7700]" /> },
+  { name: '新鲜水果', icon: <TrendingUp className="w-8 h-8 text-[#FF7700]" /> },
+  { name: '全部分类', icon: <ChevronRight className="w-8 h-8 text-[#FF7700]" /> },
 ];
 
 const FEATURED_MERCHANT = {
@@ -90,6 +96,31 @@ const RESTAURANTS: Restaurant[] = [
   },
 ];
 
+function handleImageError(event: React.SyntheticEvent<HTMLImageElement>) {
+  const target = event.currentTarget;
+  if (target.src !== IMAGE_FALLBACK) {
+    target.src = IMAGE_FALLBACK;
+  }
+}
+
+function fluidType(fontSize: number, lineHeight: number): React.CSSProperties {
+  return {
+    fontSize: `clamp(${fontSize / 2}px, ${(fontSize / 750) * 100}vw, ${fontSize}px)`,
+    lineHeight: `clamp(${lineHeight / 2}px, ${(lineHeight / 750) * 100}vw, ${lineHeight}px)`,
+  };
+}
+
+const TYPE_STYLES = {
+  meta: fluidType(20, 28),
+  body: fluidType(26, 40),
+  bodyStrong: fluidType(22, 36),
+  sectionTitle: fluidType(36, 52),
+  pageTitle: fluidType(40, 56),
+  cardTitle: fluidType(28, 40),
+  tag: fluidType(20, 28),
+  tooltip: fluidType(22, 36),
+};
+
 export default function App() {
   const [scrollY, setScrollY] = useState(0);
   const [showTooltip, setShowTooltip] = useState(false);
@@ -108,17 +139,17 @@ export default function App() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#F0F2F5]">
+    <div className="min-h-screen bg-[#F5F5F5]">
       {showTooltip && (
         <div className="fixed inset-0 z-[200]" onClick={() => setShowTooltip(false)} />
       )}
 
-      <div className="mx-auto min-h-screen w-full bg-white lg:max-w-[1200px] lg:shadow-[0_20px_60px_rgba(15,23,42,0.08)]">
+      <div className="mx-auto min-h-screen w-full max-w-[750px] bg-white shadow-[0_20px_60px_rgba(17,17,17,0.06)]">
         <div className="relative min-h-screen scroll-smooth">
-          <div className="absolute top-0 left-0 right-0 h-[320px] pointer-events-none isolate overflow-hidden sm:h-[360px]">
-            <div className="absolute inset-0 bg-gradient-to-b from-[#FFF1D6] via-white/85 to-white" />
+          <div className="absolute top-0 left-0 right-0 h-[360px] pointer-events-none isolate overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-b from-[#FFF6D8] via-white/88 to-white" />
 
-            <div className="absolute top-0 right-0 h-72 w-72 translate-x-10 -translate-y-6 overflow-hidden sm:h-80 sm:w-80 sm:translate-x-16">
+            <div className="absolute top-0 right-0 h-72 w-72 translate-x-12 -translate-y-8 overflow-hidden">
               <motion.div
                 initial={{ opacity: 0, scale: 1.08, filter: 'blur(4px)' }}
                 animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
@@ -133,6 +164,7 @@ export default function App() {
                     WebkitMaskImage: 'radial-gradient(circle at 50% 50%, black 12%, transparent 82%)',
                   }}
                   alt="Night Market"
+                  onError={handleImageError}
                 />
               </motion.div>
             </div>
@@ -148,69 +180,72 @@ export default function App() {
 
           <header
             className={cn(
-              'sticky top-0 z-50 px-4 pt-4 pb-3 transition-all duration-300 sm:px-6 lg:px-8',
-              scrollY > 20 ? 'bg-white/90 backdrop-blur-md shadow-sm' : 'bg-transparent',
+              'sticky top-0 z-50 px-4 pt-4 pb-3 transition-all duration-300',
+              scrollY > 20 ? 'border-b border-[#F0F0F0] bg-white/95 backdrop-blur-md' : 'bg-transparent',
             )}
           >
-            <div className="mx-auto flex w-full max-w-[1120px] items-center justify-between">
-              <div className="flex items-center gap-1 group cursor-pointer">
-                <MapPin className="h-4 w-4 text-brand-secondary" />
-                <span className="max-w-[160px] truncate text-xs font-bold text-gray-900 sm:max-w-none sm:text-sm">
+            <div className="mx-auto flex w-full items-center justify-between">
+              <div className="flex items-center gap-1 cursor-pointer">
+                <MapPin className="h-5 w-5 text-[#FF7700]" />
+                <span className="max-w-[200px] truncate font-semibold text-[#111111] tabular-nums" style={TYPE_STYLES.meta}>
                   成都市·春熙路
                 </span>
-                <ChevronDown className="h-3.5 w-3.5 text-gray-400" />
+                <ChevronDown className="h-4 w-4 text-[#999999]" />
               </div>
-              <div className="flex items-center gap-3 sm:gap-4">
+              <div className="flex items-center gap-3">
                 <div className="flex flex-col items-center leading-none">
-                  <CloudSun className="mb-0.5 h-4 w-4 text-orange-400 sm:h-5 sm:w-5" />
-                  <span className="text-[9px] font-black text-gray-500 sm:text-[10px]">22°C</span>
+                  <CloudSun className="mb-1 h-5 w-5 text-[#FF7700]" />
+                  <span className="font-semibold text-[#555555] tabular-nums" style={TYPE_STYLES.meta}>
+                    22°C
+                  </span>
                 </div>
                 <div className="relative">
-                  <Bell className="h-4 w-4 text-gray-900 sm:h-5 sm:w-5" />
-                  <span className="absolute -top-0.5 -right-0.5 h-1.5 w-1.5 rounded-full border border-white bg-red-500" />
+                  <Bell className="h-5 w-5 text-[#111111]" />
+                  <span className="absolute -top-1 -right-1 h-2 w-2 rounded-full bg-[#FF2D19]" />
                 </div>
               </div>
             </div>
           </header>
 
-          <main className="relative z-10 mx-auto w-full max-w-[1120px] pb-36">
-            <div className="px-4 pt-2 pb-3 sm:px-6 lg:px-8 lg:pt-4">
-              <h1 className="text-2xl font-black tracking-tight text-gray-900 sm:text-4xl lg:text-[2.75rem]">
+          <main className="relative z-10 mx-auto w-full pb-[144px]">
+            <div className="px-4 pt-3 pb-4">
+              <h1 className="font-black tracking-tight text-[#111111]" style={TYPE_STYLES.pageTitle}>
                 开启成都味觉之旅
               </h1>
-              <p className="mt-2 max-w-2xl text-sm font-medium text-gray-500 sm:text-base">
+              <p className="mt-2 max-w-[560px] font-medium text-[#555555]" style={TYPE_STYLES.body}>
                 结合你的偏好，为你选出最值得尝试的本地美味
               </p>
             </div>
 
-            <div className="px-4 pb-4 sm:px-6 lg:px-8">
-              <div className="flex items-center gap-2 rounded-full bg-white px-4 py-2.5 shadow-sm ring-1 ring-black/5 sm:px-5 sm:py-3">
-                <Search className="h-4 w-4 text-gray-400 sm:h-5 sm:w-5" />
+            <div className="px-4 pb-4">
+              <div className="flex items-center gap-3 rounded-[12px] border border-[#E5E5E5] bg-white px-4 py-3 shadow-sm">
+                <Search className="h-5 w-5 text-[#999999]" />
                 <input
                   type="text"
                   placeholder="寻找巷子里的地道蹄花..."
-                  className="flex-1 bg-transparent text-sm font-medium text-gray-700 focus:outline-none placeholder:text-gray-300 sm:text-base"
+                  className="flex-1 bg-transparent font-medium text-[#111111] focus:outline-none placeholder:text-[#999999]"
+                  style={TYPE_STYLES.tag}
                 />
-                <button className="rounded-full bg-brand-primary px-4 py-1.5 text-xs font-black shadow-sm sm:px-5 sm:py-2 sm:text-sm">
+                <button className="rounded-[12px] bg-[#FFDD00] px-4 py-3 font-black text-[#111111] shadow-sm" style={TYPE_STYLES.tag}>
                   搜索
                 </button>
               </div>
             </div>
 
-            <section className="px-4 pb-5 sm:px-6 lg:px-8">
-              <div className="grid grid-cols-5 gap-3 text-center sm:gap-4">
+            <section className="px-4 pb-5">
+              <div className="grid grid-cols-5 gap-x-3 gap-y-4 text-center">
                 {CATEGORIES.map((cat) => (
                   <motion.div
                     key={cat.name}
                     whileTap={{ scale: 0.94 }}
                     className="flex flex-col items-center gap-2"
                   >
-                    <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-white shadow-sm ring-1 ring-black/5 sm:h-14 sm:w-14">
+                    <div className="flex h-14 w-14 items-center justify-center rounded-[16px] border border-[#E5E5E5] bg-[#FAFAFA] shadow-sm">
                       {React.cloneElement(cat.icon as React.ReactElement, {
-                        className: 'h-6 w-6 text-orange-500 sm:h-7 sm:w-7',
+                        className: 'h-7 w-7 text-[#FF7700]',
                       })}
                     </div>
-                    <span className="text-[10px] font-bold tracking-tight text-gray-600 sm:text-xs">
+                    <span className="font-semibold tracking-tight text-[#555555]" style={TYPE_STYLES.tag}>
                       {cat.name}
                     </span>
                   </motion.div>
@@ -218,95 +253,93 @@ export default function App() {
               </div>
             </section>
 
-            <div className="space-y-4 px-4 sm:px-6 lg:px-8">
+            <div className="space-y-9 px-4">
               <section>
-                <div className="relative isolate overflow-hidden rounded-[28px] border border-gray-100 bg-white shadow-[0_20px_50px_rgba(15,23,42,0.08)]">
-                  <div className="bg-gradient-to-br from-orange-50 to-white/0 px-4 pt-4 pb-2 sm:px-5">
-                    <div className="flex items-start justify-between gap-3">
-                      <div className="flex items-center gap-2 relative">
-                        <div className="rounded-md bg-orange-500 p-1">
-                          <Compass className="h-3.5 w-3.5 text-white" />
-                        </div>
-                        <h2 className="text-[15px] font-extrabold tracking-tight text-gray-900 sm:text-lg">
+                <div className="relative isolate overflow-hidden rounded-[24px] border border-[#E5E5E5] bg-white shadow-[0_12px_32px_rgba(17,17,17,0.06)]">
+                  <div className="bg-gradient-to-br from-[#FFF8E8] to-white px-4 pt-4 pb-3">
+                    <div className="flex items-start justify-between gap-4">
+                      <div className="relative flex min-w-0 items-center gap-2">
+                        <h2 className="truncate font-black tracking-tight text-[#111111]" style={TYPE_STYLES.sectionTitle}>
                           成都深夜食堂
                         </h2>
-                        <div className="relative group/help">
+                        <div className="relative flex-shrink-0">
                           <HelpCircle
-                            className="h-3.5 w-3.5 cursor-pointer text-gray-300 transition-colors hover:text-gray-500"
+                            className="h-5 w-5 cursor-pointer text-[#999999] transition-colors hover:text-[#555555]"
                             onClick={(e) => {
                               e.stopPropagation();
                               setShowTooltip(!showTooltip);
                             }}
                           />
                           {showTooltip && (
-                            <div className="absolute top-6 left-[-20px] z-50 w-52 rounded-lg bg-gray-900/90 p-2 text-[10px] text-white shadow-xl ring-1 ring-white/10 backdrop-blur-sm animate-in fade-in zoom-in duration-200">
+                            <div className="absolute top-8 left-0 z-50 w-[280px] rounded-[12px] bg-[#111111]/92 p-3 text-white shadow-xl" style={TYPE_STYLES.tooltip}>
                               结合你的口味偏好与当地优质商家定制推荐
-                              <div className="absolute -top-1 left-6 h-2 w-2 rotate-45 bg-gray-900/90" />
+                              <div className="absolute -top-1 left-6 h-2 w-2 rotate-45 bg-[#111111]/92" />
                             </div>
                           )}
                         </div>
                       </div>
-                      <div className="flex flex-wrap justify-end gap-1.5">
-                        <div className="flex items-center gap-1 rounded border border-red-100 bg-red-50 px-2 py-1 text-[10px] font-black text-red-500 shadow-sm sm:text-xs">
-                          <Ticket className="h-3 w-3" />
+                      <div className="flex flex-shrink-0 items-center justify-end gap-2 whitespace-nowrap">
+                        <div className="rounded-[8px] border border-[#FFE1DD] bg-[#FFF3F1] px-2 py-1 font-black text-[#FF2D19] shadow-sm tabular-nums" style={TYPE_STYLES.tag}>
                           <span>最高满60-30</span>
                         </div>
-                        <div className="rounded border border-orange-100 bg-orange-50 px-2 py-1 text-[10px] font-black text-orange-600 shadow-sm sm:text-xs">
+                        <div className="rounded-[8px] border border-[#FFE0C2] bg-[#FFF4E8] px-2 py-1 font-black text-[#FF7700] shadow-sm" style={TYPE_STYLES.tag}>
                           <span>低至免配</span>
                         </div>
                       </div>
                     </div>
                   </div>
 
-                  <div className="px-3 pb-3 sm:px-4">
+                  <div className="px-4 pb-4">
                     <motion.div
                       whileTap={{ scale: 0.98 }}
-                      className="group cursor-pointer overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-sm transition-all hover:shadow-md"
+                      className="group cursor-pointer overflow-hidden rounded-[16px] border border-[#E5E5E5] bg-white shadow-sm transition-all hover:shadow-md"
                     >
-                      <div className="relative h-[170px] overflow-hidden sm:h-[220px] lg:h-[240px]">
+                      <div className="relative h-[220px] overflow-hidden">
                         <img
                           src={FEATURED_MERCHANT.image}
                           alt={FEATURED_MERCHANT.name}
                           className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                           referrerPolicy="no-referrer"
+                          onError={handleImageError}
                         />
                       </div>
 
-                      <div className="p-3 sm:p-4">
-                        <div className="mb-2 flex items-center gap-3">
+                      <div className="p-4">
+                        <div className="mb-3 flex items-center gap-3">
                           <img
                             src={FEATURED_MERCHANT.logo}
                             alt="logo"
-                            className="h-10 w-10 flex-shrink-0 rounded-xl object-cover ring-2 ring-gray-100"
+                            className="h-12 w-12 flex-shrink-0 rounded-[12px] border border-[#E5E5E5] object-cover"
                             referrerPolicy="no-referrer"
+                            onError={handleImageError}
                           />
                           <div className="min-w-0 flex-1">
-                            <div className="mb-1 flex items-center gap-2">
-                              <h3 className="truncate text-base font-black leading-tight tracking-tight text-gray-900 sm:text-lg">
+                            <div className="mb-2 flex items-center gap-2">
+                              <h3 className="truncate font-black tracking-tight text-[#111111]" style={TYPE_STYLES.cardTitle}>
                                 {FEATURED_MERCHANT.name}
                               </h3>
-                              <div className="flex-shrink-0 rounded-sm bg-red-500 px-1.5 py-0.5 text-[9px] font-black text-white ring-1 ring-red-400/50 sm:text-[10px]">
+                              <div className="flex-shrink-0 rounded-[8px] bg-[#FF2D19] px-2 py-1 font-black text-white tabular-nums" style={TYPE_STYLES.tag}>
                                 {FEATURED_MERCHANT.coupon}
                               </div>
                             </div>
-                            <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[10px] font-bold text-gray-500 sm:text-xs">
-                              <span className="text-orange-500">⭐ {FEATURED_MERCHANT.rating}</span>
-                              <span className="opacity-40">|</span>
+                            <div className="flex flex-wrap items-center gap-x-2 gap-y-2 font-medium text-[#888888] tabular-nums" style={TYPE_STYLES.meta}>
+                              <span className="font-semibold text-[#FF7700]">⭐ {FEATURED_MERCHANT.rating}</span>
+                              <span className="text-[#CCCCCC]">|</span>
                               <span>月售 {FEATURED_MERCHANT.sales}</span>
-                              <span className="opacity-40">|</span>
+                              <span className="text-[#CCCCCC]">|</span>
                               <span>起送{FEATURED_MERCHANT.minOrder}</span>
-                              <span className="opacity-40">|</span>
+                              <span className="text-[#CCCCCC]">|</span>
                               <span>{FEATURED_MERCHANT.distance}</span>
                             </div>
                           </div>
                         </div>
 
-                        <div className="mt-2 border-t border-gray-50 py-2">
-                          <div className="flex items-center gap-2">
-                            <span className="flex-shrink-0 rounded bg-orange-100 px-2 py-1 text-[10px] font-black text-orange-600 sm:text-xs">
+                        <div className="mt-3 border-t border-[#F0F0F0] pt-3">
+                          <div className="flex items-start gap-2">
+                            <span className="flex-shrink-0 rounded-[8px] bg-[#FFF4E8] px-2 py-1 font-black text-[#FF7700]" style={TYPE_STYLES.tag}>
                               点评高分
                             </span>
-                            <p className="truncate text-xs font-bold tracking-tight text-gray-500 sm:text-sm">
+                            <p className="font-medium tracking-tight text-[#555555]" style={TYPE_STYLES.bodyStrong}>
                               {FEATURED_MERCHANT.whyFamous}
                             </p>
                           </div>
@@ -315,31 +348,30 @@ export default function App() {
                     </motion.div>
                   </div>
 
-                  <div className="px-3 pb-4 sm:px-4 sm:pb-5">
-                    <div className="flex gap-2 overflow-x-auto no-scrollbar pb-1">
+                  <div className="px-4 pb-5">
+                    <div className="flex gap-4 overflow-x-auto no-scrollbar pb-1">
                       {SPECIALTY_DISHES_ITEMS.map((item) => (
                         <motion.div
                           key={item.name}
                           whileTap={{ scale: 0.95 }}
-                          className="group relative h-[56px] w-[138px] flex-shrink-0 cursor-pointer overflow-hidden rounded-2xl border border-gray-100 shadow-sm sm:h-[72px] sm:w-[180px]"
+                          className="group relative h-[96px] w-[176px] flex-shrink-0 cursor-pointer overflow-hidden rounded-[16px] border border-[#E5E5E5] shadow-sm"
                         >
                           <img
                             src={item.image}
                             className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
                             alt={item.name}
                             referrerPolicy="no-referrer"
+                            onError={handleImageError}
                           />
-                          <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/85 via-black/20 to-transparent transition-opacity group-hover:from-black/70" />
+                          <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/85 via-black/25 to-transparent" />
 
-                          <div className="absolute inset-0 flex flex-col items-center justify-center">
-                            <span className="text-xs font-black leading-none tracking-tight text-white drop-shadow-md sm:text-sm">
+                          <div className="absolute inset-0 flex flex-col items-center justify-center px-2">
+                            <span className="font-black tracking-tight text-white drop-shadow-md" style={TYPE_STYLES.tag}>
                               {item.name}
                             </span>
-                            <div className="mt-1 px-1.5">
-                              <span className="whitespace-nowrap text-[8px] font-bold leading-none text-[#FFD700] drop-shadow-md sm:text-[10px]">
-                                {item.sub}
-                              </span>
-                            </div>
+                            <span className="mt-1 font-semibold text-[#FFDD00] drop-shadow-md" style={TYPE_STYLES.tag}>
+                              {item.sub}
+                            </span>
                           </div>
                         </motion.div>
                       ))}
@@ -349,55 +381,57 @@ export default function App() {
               </section>
 
               <section className="pb-8">
-                <div className="mb-3 flex items-center justify-between px-0.5">
-                  <h3 className="text-lg font-black tracking-tight text-gray-900 sm:text-2xl">
+                <div className="mb-4 flex items-center justify-between">
+                  <h3 className="font-black tracking-tight text-[#111111]" style={TYPE_STYLES.sectionTitle}>
                     附近商家
                   </h3>
-                  <div className="flex gap-3 text-[11px] font-bold text-gray-400 sm:text-sm">
-                    <span className="text-orange-600">综合</span>
+                  <div className="flex gap-3 font-semibold text-[#999999]" style={TYPE_STYLES.tag}>
+                    <span className="text-[#FF7700]">综合</span>
                     <span>评分</span>
                   </div>
                 </div>
 
-                <div className="space-y-3">
+                <div className="space-y-4">
                   {RESTAURANTS.map((res) => (
                     <div
                       key={res.id}
-                      className="group flex cursor-pointer gap-3 rounded-2xl border border-gray-100 bg-white p-3 transition-colors hover:bg-gray-50"
+                      className="group flex cursor-pointer gap-4 rounded-[16px] border border-[#E5E5E5] bg-white p-4 transition-colors hover:bg-[#FAFAFA]"
                     >
-                      <div className="h-20 w-20 flex-shrink-0 overflow-hidden rounded-xl border border-gray-50 bg-gray-100 sm:h-24 sm:w-24">
+                      <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-[12px] border border-[#E5E5E5] bg-[#FAFAFA]">
                         <img
                           src={res.image}
                           alt={res.name}
                           className="h-full w-full object-cover"
                           referrerPolicy="no-referrer"
+                          onError={handleImageError}
                         />
                       </div>
-                      <div className="flex flex-1 flex-col justify-between py-0.5">
+                      <div className="flex flex-1 flex-col justify-between">
                         <div>
-                          <h4 className="mb-1 text-sm font-bold leading-tight text-gray-900 sm:text-base">
+                          <h4 className="mb-2 font-bold text-[#111111]" style={TYPE_STYLES.cardTitle}>
                             {res.name}
                           </h4>
-                          <div className="mb-2 flex flex-wrap items-center gap-2 text-[10px] font-bold text-gray-400 sm:text-xs">
-                            <span className="font-black text-orange-500">⭐ {res.rating}</span>
+                          <div className="mb-3 flex flex-wrap items-center gap-2 font-medium text-[#888888] tabular-nums" style={TYPE_STYLES.meta}>
+                            <span className="font-semibold text-[#FF7700]">⭐ {res.rating}</span>
                             <span>{res.sales}</span>
                             <span>{res.distance}</span>
                             <span>{res.deliveryTime}分钟达</span>
                           </div>
-                          <div className="flex flex-wrap gap-1.5">
+                          <div className="flex flex-wrap gap-2">
                             {res.tags.slice(0, 2).map((tag) => (
                               <span
                                 key={tag}
-                                className="rounded border border-gray-100 bg-gray-50 px-1.5 py-0.5 text-[9px] font-bold text-gray-500 sm:text-[10px]"
+                                className="rounded-[8px] border border-[#E5E5E5] bg-[#F7F7F7] px-2 py-1 font-semibold text-[#555555]"
+                                style={TYPE_STYLES.tag}
                               >
                                 {tag}
                               </span>
                             ))}
                           </div>
                         </div>
-                        <div className="mt-3 flex items-center gap-1 text-[10px] font-bold text-gray-400 opacity-80 sm:text-xs">
+                        <div className="mt-4 flex items-center gap-2 font-medium text-[#999999] tabular-nums" style={TYPE_STYLES.tag}>
                           <span>人均{res.avgPrice}</span>
-                          <span className="h-0.5 w-0.5 rounded-full bg-gray-300" />
+                          <span className="h-1 w-1 rounded-full bg-[#CCCCCC]" />
                           <span>配送{res.deliveryFee}</span>
                         </div>
                       </div>
@@ -408,32 +442,32 @@ export default function App() {
             </div>
           </main>
 
-          <div className="fixed bottom-0 left-0 right-0 z-50">
-            <div className="mx-auto w-full max-w-[1120px] px-4 sm:px-6 lg:px-8">
-              <nav className="flex items-center justify-between rounded-t-[24px] border border-white/70 bg-white/95 px-8 pt-3 pb-7 shadow-[0_-15px_40px_rgba(0,0,0,0.06)] ring-1 ring-black/5 backdrop-blur-xl">
-                <div className="flex flex-col items-center gap-1 text-orange-500">
-                  <div className="rounded-xl bg-orange-50 p-1.5 ring-1 ring-orange-100 shadow-sm">
-                    <UtensilsCrossed className="h-4.5 w-4.5 fill-current" />
+          <div className="fixed inset-x-0 bottom-0 z-50">
+            <div className="mx-auto w-full max-w-[750px] px-4">
+              <nav className="flex items-center justify-between rounded-t-[24px] border border-[#E5E5E5] bg-white/96 px-8 pt-4 pb-8 shadow-[0_-12px_32px_rgba(17,17,17,0.06)] backdrop-blur-xl">
+                <div className="flex flex-col items-center gap-2 text-[#FF7700]">
+                  <div className="rounded-[12px] bg-[#FFF8E8] p-2 ring-1 ring-[#FFE0C2]">
+                    <UtensilsCrossed className="h-5 w-5 fill-current" />
                   </div>
-                  <span className="text-[10px] font-black sm:text-xs">外卖</span>
+                  <span className="font-black" style={TYPE_STYLES.tag}>外卖</span>
                 </div>
-                <div className="group flex cursor-pointer flex-col items-center gap-1 text-gray-400">
-                  <Compass className="h-4.5 w-4.5 transition-colors group-hover:text-gray-900" />
-                  <span className="text-[10px] font-bold transition-colors group-hover:text-gray-900 sm:text-xs">
+                <div className="group flex cursor-pointer flex-col items-center gap-2 text-[#999999]">
+                  <Compass className="h-5 w-5 transition-colors group-hover:text-[#111111]" />
+                  <span className="font-semibold transition-colors group-hover:text-[#111111]" style={TYPE_STYLES.tag}>
                     寻味
                   </span>
                 </div>
-                <div className="group flex cursor-pointer flex-col items-center gap-1 text-gray-400">
-                  <Clock className="h-4.5 w-4.5 transition-colors group-hover:text-gray-900" />
-                  <span className="text-[10px] font-bold transition-colors group-hover:text-gray-900 sm:text-xs">
+                <div className="group flex cursor-pointer flex-col items-center gap-2 text-[#999999]">
+                  <Clock className="h-5 w-5 transition-colors group-hover:text-[#111111]" />
+                  <span className="font-semibold transition-colors group-hover:text-[#111111]" style={TYPE_STYLES.tag}>
                     订单
                   </span>
                 </div>
-                <div className="group flex cursor-pointer flex-col items-center gap-1 text-gray-400">
-                  <div className="h-4.5 w-4.5 overflow-hidden rounded-full border border-gray-300 bg-gray-100 ring-1 ring-white shadow-sm">
-                    <img src="https://i.pravatar.cc/100?u=me" alt="user" referrerPolicy="no-referrer" />
+                <div className="group flex cursor-pointer flex-col items-center gap-2 text-[#999999]">
+                  <div className="h-5 w-5 overflow-hidden rounded-full border border-[#CCCCCC] bg-[#F7F7F7] ring-1 ring-white shadow-sm">
+                    <img src="https://i.pravatar.cc/100?u=me" alt="user" referrerPolicy="no-referrer" onError={handleImageError} />
                   </div>
-                  <span className="text-[10px] font-bold transition-colors group-hover:text-gray-900 sm:text-xs">
+                  <span className="font-semibold transition-colors group-hover:text-[#111111]" style={TYPE_STYLES.tag}>
                     我的
                   </span>
                 </div>

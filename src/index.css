@@ -1,15 +1,27 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Inter", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", ui-sans-serif, system-ui, sans-serif;
-  
-  --color-brand-primary: #FFCC33; /* Main Meituan Yellow */
-  --color-brand-secondary: #FF8000; /* Warm Orange */
+  --font-sans: "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", "Microsoft YaHei", "Roboto", ui-sans-serif, system-ui, sans-serif;
+
+  --color-brand-primary: #FFDD00;
+  --color-brand-secondary: #FF7700;
+}
+
+:root {
+  color: #111111;
+  background-color: #F5F5F5;
+  font-family: var(--font-sans);
+}
+
+html {
+  background-color: #F5F5F5;
 }
 
 body {
-  background-color: #F6F6F6;
-  color: #333333;
+  margin: 0;
+  background-color: #F5F5F5;
+  color: #111111;
+  font-family: var(--font-sans);
 }
 
 ::-webkit-scrollbar {
