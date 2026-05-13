@@ -2,6 +2,7 @@
 
 @theme {
   --font-sans: "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", "Microsoft YaHei", "Roboto", ui-sans-serif, system-ui, sans-serif;
+  --font-number: "Roboto", "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", "Microsoft YaHei", ui-sans-serif, system-ui, sans-serif;
 
   --color-brand-primary: #FFDD00;
   --color-brand-secondary: #FF7700;
