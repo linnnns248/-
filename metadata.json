@@ -1,0 +1,8 @@
+{
+  "name": "demo_白天_0513_(2)",
+  "description": "只保留夜宵、特色、排队供给模块。并透出券信息。推荐理由部分融合特色菜+商家描述文本",
+  "requestFramePermissions": [
+    "geolocation"
+  ],
+  "majorCapabilities": []
+}
