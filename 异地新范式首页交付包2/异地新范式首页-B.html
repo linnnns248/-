@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>异地旅游用户外卖首页卡片 B</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      min-height: 100%;
+      background: #f3f3f3;
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", sans-serif;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      width: 100%;
+      overflow-x: hidden;
+    }
+
+    .page-shell {
+      width: min(750px, 100vw);
+      max-width: 750px;
+      min-height: 100vh;
+      background: #ffffff;
+    }
+
+    .screen-image,
+    .card-frame,
+    .card-frame svg {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .card-frame {
+      line-height: 0;
+      position: relative;
+      z-index: 1;
+      margin-top: -8px;
+      margin-bottom: -8px;
+    }
+
+    .bottom-tab-spacer {
+      width: 100%;
+      aspect-ratio: 750 / 155;
+    }
+
+    .bottom-tab-wrap {
+      position: fixed;
+      left: 50%;
+      bottom: 0;
+      transform: translateX(-50%);
+      width: min(750px, 100vw);
+      z-index: 20;
+      background: #ffffff;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-shell" aria-label="异地旅游用户外卖首页整屏拼接预览">
+    <img class="screen-image" src="./首页无氛围头图.png" alt="首页无氛围头图">
+
+    <div class="card-frame" aria-label="异地旅游用户外卖首页卡片，基准尺寸 750 × 398 像素">
+      <svg viewBox="0 0 750 398" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="成都异地旅游用户外卖首页蹄花汤推荐卡片">
+        <defs>
+          <filter id="cardShadow" x="-10%" y="-10%" width="120%" height="130%">
+            <feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="#111111" flood-opacity="0.1"/>
+          </filter>
+          <linearGradient id="pageCardBg" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#ffffff"/>
+            <stop offset="100%" stop-color="#ffffff"/>
+          </linearGradient>
+          <linearGradient id="foodBg" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#f3e9de"/>
+            <stop offset="100%" stop-color="#e1cfbb"/>
+          </linearGradient>
+          <radialGradient id="bowlOuter" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#fbf5ef"/>
+            <stop offset="72%" stop-color="#ece1d4"/>
+            <stop offset="100%" stop-color="#d9c4ae"/>
+          </radialGradient>
+          <radialGradient id="soupInner" cx="48%" cy="40%" r="58%">
+            <stop offset="0%" stop-color="#fff5df"/>
+            <stop offset="62%" stop-color="#f1cc98"/>
+            <stop offset="100%" stop-color="#d59650"/>
+          </radialGradient>
+          <linearGradient id="trotterFill" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#dca474"/>
+            <stop offset="100%" stop-color="#9b643d"/>
+          </linearGradient>
+          <linearGradient id="bandBg" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#ffffff"/>
+            <stop offset="100%" stop-color="#ffffff"/>
+          </linearGradient>
+          <linearGradient id="logoBrown" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#4c2c23"/>
+            <stop offset="100%" stop-color="#875640"/>
+          </linearGradient>
+          <linearGradient id="ambienceWash" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#f8f4eb"/>
+            <stop offset="52%" stop-color="#fbf8f1"/>
+            <stop offset="100%" stop-color="#f4efe7"/>
+          </linearGradient>
+          <linearGradient id="bambooLeaf" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#95a78b"/>
+            <stop offset="100%" stop-color="#62795c"/>
+          </linearGradient>
+          <linearGradient id="cityGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#d8dbd9"/>
+            <stop offset="100%" stop-color="#bcc1c0"/>
+          </linearGradient>
+          <filter id="ambienceSoft" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="6"/>
+          </filter>
+          <clipPath id="pageCardClip">
+            <rect x="16" y="8" width="718" height="382" rx="36"/>
+          </clipPath>
+          <clipPath id="merchantLogoClip">
+            <rect x="32" y="191" width="234" height="183" rx="22"/>
+          </clipPath>
+        </defs>
+
+        <rect width="750" height="398" fill="transparent"/>
+        <rect x="16" y="8" width="718" height="382" rx="36" fill="url(#pageCardBg)" filter="url(#cardShadow)"/>
+        <g clip-path="url(#pageCardClip)">
+          <rect x="16" y="8" width="718" height="382" fill="url(#ambienceWash)"/>
+          <g opacity="0.78">
+            <g transform="translate(14 8)" opacity="0.62">
+              <path d="M42 0c-10 38-14 84-12 152" fill="none" stroke="#82937a" stroke-width="4" stroke-linecap="round" opacity="0.38"/>
+              <path d="M78 4c-9 31-12 72-11 126" fill="none" stroke="#96a68b" stroke-width="3.5" stroke-linecap="round" opacity="0.3"/>
+              <path d="M0 34c24-9 48-4 69 15c-22 14-45 12-69-15Z" fill="url(#bambooLeaf)" opacity="0.28"/>
+              <path d="M24 62c26-10 52-7 77 11c-24 15-52 12-77-11Z" fill="url(#bambooLeaf)" opacity="0.24"/>
+              <path d="M44 92c22-7 42-5 62 10c-18 12-40 10-62-10Z" fill="url(#bambooLeaf)" opacity="0.22"/>
+              <path d="M56 28c23-10 44-8 66 8c-22 14-45 14-66-8Z" fill="url(#bambooLeaf)" opacity="0.2"/>
+            </g>
+            <g filter="url(#ambienceSoft)" opacity="0.42">
+              <path d="M78 176c64-50 126-74 188-74c48 0 92 11 134 36c-88 20-194 34-322 38Z" fill="#ddd4c6"/>
+              <path d="M228 188c84-40 156-53 228-48c42 3 84 13 136 38c-116 16-236 22-364 10Z" fill="#e5ddd1"/>
+              <path d="M486 176c44-28 88-42 134-44c36-1 72 9 106 30c-64 18-146 26-240 14Z" fill="#ddd6cb"/>
+            </g>
+            <g transform="translate(78 150)" opacity="0.48">
+              <ellipse cx="78" cy="28" rx="104" ry="16" fill="#ddd4c7"/>
+              <path d="M58 18l18-14l18 14" fill="#cab89e"/>
+              <rect x="66" y="18" width="20" height="24" rx="4" fill="#d9ccb8"/>
+              <path d="M18 44c22-24 48-35 80-35c30 0 58 11 84 35" fill="none" stroke="#cdc2b1" stroke-width="4" stroke-linecap="round"/>
+              <ellipse cx="4" cy="42" rx="12" ry="8" fill="#454545" opacity="0.16"/>
+              <circle cx="14" cy="30" r="11" fill="#f1ede7"/>
+              <circle cx="10" cy="25" r="4" fill="#4b4b4b"/>
+              <circle cx="18" cy="25" r="4" fill="#4b4b4b"/>
+              <ellipse cx="14" cy="35" rx="7" ry="5" fill="#f6f1ea"/>
+            </g>
+            <g transform="translate(442 72)" opacity="0.44">
+              <path d="M0 118c36-24 78-36 126-38c54-2 100 11 148 38" fill="none" stroke="#bfc4c2" stroke-width="4" stroke-linecap="round"/>
+              <path d="M8 118c18-28 40-43 68-45c34-3 61 11 86 45" fill="#cfd4d2" opacity="0.82"/>
+              <path d="M130 16l8 12l8-12v94h-16Z" fill="url(#cityGrad)"/>
+              <path d="M138 4l10 12h-20Z" fill="#c7cbca"/>
+              <rect x="174" y="42" width="16" height="76" rx="5" fill="url(#cityGrad)"/>
+              <rect x="206" y="24" width="20" height="94" rx="6" fill="url(#cityGrad)"/>
+              <rect x="242" y="8" width="24" height="110" rx="7" fill="url(#cityGrad)"/>
+              <rect x="280" y="34" width="18" height="84" rx="6" fill="url(#cityGrad)"/>
+            </g>
+            <g transform="translate(458 86)" fill="none" stroke="#cfc7bc" stroke-width="2.4" stroke-linecap="round" opacity="0.5">
+              <path d="M0 0l8 4l8-4"/>
+              <path d="M20 6l8 4l8-4"/>
+              <path d="M42 2l8 4l8-4"/>
+            </g>
+            <g transform="translate(606 158)" opacity="0.7">
+              <path d="M0 18c18-13 47-18 77-8c-4 20-24 34-50 40c-17-7-28-16-27-32Z" fill="#d6c3a6"/>
+              <text x="37" y="26" text-anchor="middle" font-size="18" font-weight="700" fill="#776554">成都</text>
+              <text x="38" y="39" text-anchor="middle" font-size="8" letter-spacing="1.4" fill="#8c7b68">CHENGDU</text>
+            </g>
+          </g>
+        </g>
+        <rect x="16" y="92" width="718" height="298" fill="#ffffff"/>
+
+        <text x="32" y="69" font-size="38" font-weight="700" fill="#111111">当地必打卡</text>
+        <a href="javascript:void(0)" aria-label="查看当地爆火好店">
+          <g>
+            <rect x="486" y="31" width="229" height="46" rx="23" fill="#fff7ef" stroke="#ffd9bb"/>
+            <text x="497" y="60" font-size="20">
+              <tspan font-weight="700" fill="#ff7700">不只特色 </tspan>
+              <tspan font-weight="500" fill="#7d7d7d">当地火爆好店</tspan>
+            </text>
+            <circle cx="703" cy="54" r="11" fill="#ffffff" stroke="#ff7700" stroke-width="2"/>
+            <text x="703" y="59" text-anchor="middle" font-size="18" font-weight="700" fill="#ff7700">›</text>
+          </g>
+        </a>
+        <rect x="32" y="107" width="686" height="72" rx="20" fill="url(#bandBg)"/>
+        <text x="52" y="143" dominant-baseline="middle" font-size="28" font-weight="700" fill="#cd7a2d">一店吃遍多种特色</text>
+        <a href="javascript:void(0)" aria-label="查看店内特色菜 老妈蹄花">
+          <g>
+            <rect x="356" y="117" width="176" height="52" rx="18" fill="#ffffff" stroke="#f0dfcf"/>
+            <text x="380" y="149" font-size="22" font-weight="700" fill="#111111">老妈蹄花</text>
+            <circle cx="506" cy="143" r="14" fill="#ff7700"/>
+            <text x="506" y="149" text-anchor="middle" font-size="22" font-weight="700" fill="#ffffff">›</text>
+          </g>
+        </a>
+        <a href="javascript:void(0)" aria-label="查看店内特色菜 蛋烘糕">
+          <g>
+            <rect x="544" y="117" width="174" height="52" rx="18" fill="#ffffff" stroke="#f0dfcf"/>
+            <text x="568" y="149" font-size="22" font-weight="700" fill="#111111">蛋烘糕</text>
+            <circle cx="692" cy="143" r="14" fill="#ff7700"/>
+            <text x="692" y="149" text-anchor="middle" font-size="22" font-weight="700" fill="#ffffff">›</text>
+          </g>
+        </a>
+
+        <rect x="32" y="176" width="686" height="16" fill="#ffffff"/>
+        <rect x="32" y="191" width="234" height="183" rx="22" fill="#d9d9d9"/>
+        <image href="./maliuji-logo.jpg" x="32" y="191" width="234" height="183" preserveAspectRatio="xMidYMid meet" clip-path="url(#merchantLogoClip)"/>
+
+        <rect x="298" y="191" width="420" height="183" rx="24" fill="#ffffff"/>
+        <text x="320" y="236" font-size="34" font-weight="700" fill="#111111">麻六记</text>
+
+        <text x="320" y="274" font-size="20" font-weight="500" fill="#555555">4.9分</text>
+        <text x="392" y="274" font-size="20" font-weight="500" fill="#c8c8c8">·</text>
+        <text x="413" y="274" font-size="20" font-weight="500" fill="#555555">月售2000+</text>
+        <text x="519" y="274" font-size="20" font-weight="500" fill="#c8c8c8">·</text>
+        <text x="540" y="274" font-size="20" font-weight="500" fill="#555555">人均¥61</text>
+
+        <text x="320" y="310" font-size="20" font-weight="500" fill="#555555">起送¥20</text>
+        <text x="402" y="310" font-size="20" font-weight="500" fill="#c8c8c8">·</text>
+        <text x="423" y="310" font-size="20" font-weight="500" fill="#555555">免配送费</text>
+        <text x="523" y="310" font-size="20" font-weight="500" fill="#c8c8c8">·</text>
+        <text x="544" y="310" font-size="20" font-weight="500" fill="#555555">2.1km 31分钟</text>
+
+        <rect x="320" y="334" width="72" height="30" rx="10" fill="#e8f6eb"/>
+        <text x="356" y="355" text-anchor="middle" font-size="20" font-weight="700" fill="#2f8f54">堂食店</text>
+        <rect x="402" y="334" width="108" height="30" rx="10" fill="#fff1df" stroke="#ffd5b4"/>
+        <text x="456" y="355" text-anchor="middle" font-size="20" font-weight="600" fill="#ff7700">当地人推荐</text>
+      </svg>
+    </div>
+
+    <img class="screen-image" src="./橱窗切图.png" alt="橱窗切图">
+    <img class="screen-image" src="./列表切图.png" alt="列表切图">
+    <div class="bottom-tab-spacer" aria-hidden="true"></div>
+  </div>
+
+  <div class="bottom-tab-wrap">
+    <img class="screen-image" src="./底tab.png" alt="底部 tab">
+  </div>
+</body>
+</html>
